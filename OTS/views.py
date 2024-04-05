@@ -96,17 +96,28 @@ def calculateTestResult(request):
     result.points=points
     result.save()
     
-    
     #update candidate table
     candidate=Candidate.objects.get(Username=request.session['username'])
     candidate.test_attempted+=1
     candidate.points=(candidate.points*(candidate.test_attempted-1)+points)/candidate.test_attempted
     candidate.save()
-    return HttpResponseRedirect('result')               
+    return HttpResponseRedirect('result')
+               
 def testResultHistory(request):
-    pass
+    if 'name' not in request.session.keys():
+        res=HttpResponseRedirect("login")
+        
+    candidate = Candidate.objects.filter(username=request.session['username'])
+    result = Result.objects.filter(username_id=candidate[0].username)
+    context={'candidate':candidate, 'results':result}
+    res = render(request,'candidate_history.html',context)
 def showTestResult(request):
-    pass
+    if 'name' not in request.session.keys():
+        res=HttpResponseRedirect("login")
+        #fetch latest result from Result table
+    result=Result.objects.filter(resultid=result.latest('resultid').resultid,username_id=request.session['username'])
+    context={'result':result}  
+    res=render(request,'show_result.html',context)  
 def logoutView(request):
     if 'name' not in request.session.keys():
         del request.session['username']
