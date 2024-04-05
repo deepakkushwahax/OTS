@@ -1,14 +1,30 @@
 {% extends "main.html" %}
 
-{% block title %} Welcome to Vender Management System {% endblock title%}
+{% block title %} OTS - Test Result {% endblock title%}
 {% block top %}
 <a href="{% url "OTS:registrationForm" %}">Sinup</a>
-<a href="{% url "OTS:Login" %}"> Login </a>
+<a href="{% url "OTS:Logout" %}"> Login </a>
 {% endblock %}
 {% block content %}
-<p>
-For each model field that has choices set, Django will normalize the choices to a list of 2-tuples and add a
-method to retrieve the human-readable name for the field's current value. See ) in the
-database API documentation.
-</p>
+<table>
+<tr>
+    <th>Date<th>
+    <th>Time<th>
+    <th>Attempt<th>
+    <th>Right<th>
+    <th>Wrong<th>
+    <th>Points<th>            
+
+</tr>
+{% for r in result%}
+<tr>
+    <th>{{r.date}}<th>
+    <th>{{r.time}}<th>
+    <th>{{r.attempt}}<th>
+    <th>{{r.right}}<th>
+    <th>{{r.wrong}}<th>
+    <th>{{r.points}}<th>            
+
+</tr>
+<table>
 {% endblock %}
