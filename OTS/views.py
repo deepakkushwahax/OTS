@@ -67,7 +67,42 @@ def testpaper(request):
     res=render(request,'test_paper.html',context)
     return res
 def calculateTestResult(request):
-    pass
+    if 'name' not in request.session.keys():
+        res=HttpResponseRedirect("login")
+    total_attempt=0
+    total_right=0
+    total_wrong=0
+    qid_list=[]
+    for k in request.POST:
+        if k.startswith('qno'):
+            qid_list.append(int(request.POST[k]))
+    for n in qid_list:
+        question=Question.object.get(qid=n)
+        try:
+            if question.ans==request.POST['q'+str(n)]:
+                total_right+=1
+            else:
+                total_wrong+=1
+            total_attempt+=1
+        except:
+            pass   
+    points = (total_right-total_wrong)/len(qid_list)*10
+    #store result in result table
+    result = Result()
+    result.username=Candidate.object.get(username=request.session['username'])
+    result.attempt=total_attempt
+    result.right=total_right
+    result.wrong=total_wrong
+    result.points=points
+    result.save()
+    
+    
+    #update candidate table
+    candidate=Candidate.objects.get(Username=request.session['username'])
+    candidate.test_attempted+=1
+    candidate.points=(candidate.points*(candidate.test_attempted-1)+points)/candidate.test_attempted
+    candidate.save()
+    return HttpResponseRedirect('result')               
 def testResultHistory(request):
     pass
 def showTestResult(request):

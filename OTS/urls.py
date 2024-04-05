@@ -10,8 +10,8 @@ urlpatterns = [
     path('home',candidateHome,name='home'),
     path('test-paper',testpaper,name='testPaper'),
     path('calculate-result',calculateTestResult,name='calculateTest'),
-    path('test-history',showTestResult,name='testHistory'),
-    path('result',showTestResult),
+    path('test-history',testResultHistory,name='testHistory'),
+    path('result',showTestResult,name="result"),
     path('logout',logoutView,name='logout')
     
 ]

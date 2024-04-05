@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block title %} Welcome to Vender Management System {% endblock title%}
+{% block top %}
+<a href="{% url "OTS:registrationForm" %}">Sinup</a>
+<a href="{% url "OTS:Login" %}"> Login </a>
+{% endblock %}
+{% block content %}
+<p>
+For each model field that has choices set, Django will normalize the choices to a list of 2-tuples and add a
+method to retrieve the human-readable name for the field's current value. See ) in the
+database API documentation.
+</p>
+{% endblock %}
