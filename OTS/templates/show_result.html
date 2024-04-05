@@ -2,7 +2,7 @@
 
 {% block title %} OTS - Test Result {% endblock title%}
 {% block top %}
-<a href="{% url "OTS:registrationForm" %}">Sinup</a>
+<a href="{% url "OTS:home" %}">Home</a>
 <a href="{% url "OTS:Logout" %}"> Login </a>
 {% endblock %}
 {% block content %}
@@ -26,5 +26,6 @@
     <th>{{r.points}}<th>            
 
 </tr>
+{% endfor %}
 <table>
 {% endblock %}
