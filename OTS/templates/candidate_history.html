@@ -8,7 +8,7 @@
 {% block content %}
 <h1>Your Report Card<h1>
     <p>
-        Hi {{candidate.name}}, you have attempted in total {{candidate.test_attempted}} tests and you have scored {{candidate.points}} on the scale of 10.
+        Hi <span class="special">{{candidate.name}}</span>, you have attempted in total <span class="special">{{candidate.test_attempted}}</span> tests and you have scored <span class="special">{{candidate.points}}</span> on the scale of 10.
         <table>
             <tr>
                 <th>Date<th>
